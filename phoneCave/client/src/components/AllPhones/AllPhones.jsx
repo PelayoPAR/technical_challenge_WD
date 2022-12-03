@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+// import { useNavigate } from "react-router-dom";
 // import Error from "../../components/"
 
 function AllPhones() {
   const [phoneList, setPhoneList] = useState();
   // const [isLoading, setIsLoading] = useState(true);
   // const [isError, setIsError] = useState(false);
+  // const navigate = useNavigate();
+  const [showPhoneDetails, setShowPhoneDetails] = useState(false);
 
   useEffect(() => {
     // setIsLoading(true);
@@ -23,6 +26,7 @@ function AllPhones() {
     // });
   }, []);
   console.log(phoneList);
+  console.log(showPhoneDetails);
 
   // if (isLoading) {
   //   return <Loading />;
@@ -40,12 +44,25 @@ function AllPhones() {
           phoneList.map((phone) => {
             return (
               <div key={phone.id}>
-                <h3>{phone.name}</h3>
-
-                <img
-                  src={`/images/${phone.imageFileName}`}
-                  alt="phoneImg"
-                ></img>
+                <div>
+                  <h3>{phone.name}</h3>
+                  {/* <Link to={`/phones/${phone.id}`}> */}
+                  <img
+                    // onClick={() => {
+                    //   navigate(`phones/${phone.id}`);
+                    // }}
+                    onClick={() => {
+                      setShowPhoneDetails(!showPhoneDetails);
+                    }}
+                    src={`/images/${phone.imageFileName}`}
+                    alt="phoneImg"
+                  />
+                  {showPhoneDetails && (
+                    <div>
+                      <p>details</p>
+                    </div>
+                  )}
+                </div>
               </div>
             );
           })}
